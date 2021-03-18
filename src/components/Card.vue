@@ -1,21 +1,59 @@
 <template>
     <div class="card-content">
-        <div class="card">
+        <div class="card d-flex">
             
             <div class="card-header">
+
                 <div class="img-rounded">
                     <img :src="logo" :alt="company" />
                 </div>
-                {{ position }}
-                <div class="job-title">
-                    {{ company }}
+                
+
+                <div class="d-flex">
+                    <div class="job-title">
+                        <h3>{{ company }}</h3>
+                    </div>
+
+                    <div v-if="newTag">
+                        <span className="new uppercase f-light f-8 p-3-8 br-1 t-center">
+                            new
+                        </span>
+                    </div>
+                    <div v-if="featuredTag">
+                        <span className="featured uppercase f-light f-8 p-3-8 br-1 t-center">
+                            featured
+                        </span>
+                    </div>
+
                 </div>
 
-                <div v-if="newTag">
-                    new 
+                <h2>{{ position }}</h2>
+
+                <div>
+                       {{ postedAt }} - {{ contract }} - {{ location }}
                 </div>
-                <div v-if="featuredTag">
-                    featured
+
+
+            </div>
+
+            <div>
+
+                <div className="d-flex f-wrap">
+
+                    <div v-if="languages" >
+                        <a href="/" className="tag" v-for="(language, index) in languages" :key="index">
+                            {{ language }}
+                        </a>
+                    </div>
+
+                    <div v-if="tools" >
+                        <a href="/" className="tag" v-for="(tool, index) in tools" :key="index">
+                            {{ tool }}
+                        </a>
+                    </div>
+
+                    
+
                 </div>
 
             </div>
@@ -45,9 +83,30 @@ export default {
             required: false
         },
         featuredTag: {
-             type: Boolean,
+            type: Boolean,
+            required: false
+        },
+        postedAt: {
+            type: String,
+            required: true
+        }, 
+        contract: {
+            type: String,
+            required: true
+        }, 
+        location: {
+            type: String,
+            required: true
+        },
+        languages: {
+            type: Array,
+            required: false
+        },
+        tools: {
+            type: Array,
             required: false
         }
+
     }
 }
 </script>
@@ -75,6 +134,10 @@ export default {
     box-shadow: 3px 8px 8px #5ba3a429;
     line-height: 1.5;
     width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .card img {
