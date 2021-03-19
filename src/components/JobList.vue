@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="jobs">
       <div class="job-list">
         <Card 
           v-for="job in jobs" 
@@ -52,12 +52,22 @@ export default {
 
 <style scoped>
 
+
+.jobs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .job-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
+  max-width: 1440px;
+  width: 100%;
 }
 
 </style>

@@ -5,54 +5,67 @@
             <div class="card-header">
 
                 <div class="img-rounded">
-                    <img :src="logo" :alt="company" />
-                </div>
-                
-
-                <div class="d-flex">
-                    <div class="job-title">
-                        <h3>{{ company }}</h3>
-                    </div>
-
-                    <div v-if="newTag">
-                        <span className="new uppercase f-light f-8 p-3-8 br-1 t-center">
-                            new
-                        </span>
-                    </div>
-                    <div v-if="featuredTag">
-                        <span className="featured uppercase f-light f-8 p-3-8 br-1 t-center">
-                            featured
-                        </span>
-                    </div>
-
+                    <img  :src="logo" :alt="company" />
                 </div>
 
-                <h2>{{ position }}</h2>
+                <div class="job-info">
 
-                <div>
-                       {{ postedAt }} - {{ contract }} - {{ location }}
+                    <div class="d-flex">
+                        <div class="job-title">
+                            <h3>{{ company }}</h3>
+                        </div>
+
+                        <div v-if="newTag">
+                            <span class="new uppercase f-light f-8 p-3-8 br-1 t-center">
+                                new
+                            </span>
+                        </div>
+                        <div v-if="featuredTag">
+                            <span class="featured uppercase f-light f-8 p-3-8 br-1 t-center">
+                                featured
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <h2>{{ position }}</h2>
+
+                    <div>
+                        {{ postedAt }} - {{ contract }} - {{ location }}
+                    </div>
                 </div>
-
 
             </div>
 
             <div>
 
-                <div className="d-flex f-wrap">
+                <div class="d-flex f-wrap">
+
+                    <div>
+                        <button @click="filterJob (role)"  class="tag">
+                            {{ role }}
+                        </button>
+                    </div>
+
+                    <div >
+                        <button @click="filterJob(level)" class="tag">
+                            {{ level }}
+                        </button>
+                    </div>
 
                     <div v-if="languages" >
-                        <a href="/" className="tag" v-for="(language, index) in languages" :key="index">
+                        <button @click="filterJob(language)" class="tag" 
+                        v-for="(language, index) in languages" :key="index">
                             {{ language }}
-                        </a>
+                        </button>
                     </div>
 
                     <div v-if="tools" >
-                        <a href="/" className="tag" v-for="(tool, index) in tools" :key="index">
+                        <button @click="filterJob(tool)" class="tag" 
+                            v-for="(tool, index) in tools" :key="index">
                             {{ tool }}
-                        </a>
+                        </button>
                     </div>
-
-                    
 
                 </div>
 
@@ -98,6 +111,14 @@ export default {
             type: String,
             required: true
         },
+        role: {
+            type: String,
+            required: true
+        }, 
+        level: {
+            type: String,
+            required: true
+        },
         languages: {
             type: Array,
             required: false
@@ -107,6 +128,11 @@ export default {
             required: false
         }
 
+    },
+    methods: {
+        filterJob: function (filterValue) {
+            console.log("filter!", filterValue)
+        }
     }
 }
 </script>
@@ -120,10 +146,11 @@ export default {
 
 .img-rounded {
     border-radius: 100px;
-    background-color: gray;
-    width: 50px;
-    height: 50px;
+    background-color: #ddd;
+    width: 70px;
+    height: 70px;
     overflow: hidden;
+    margin-right: 15px;
 }
 
 .card {
@@ -144,6 +171,10 @@ export default {
     width: 50px;
     height: auto;
 }
+
+.card-header {
+    display: flex;
+}
 h2 {
     font-size: 1rem;
 }
@@ -155,8 +186,13 @@ ul {
     list-style: none;
     padding-left: 0;
 }
-a {
+a, button {
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
 }
 
 hr {
@@ -202,10 +238,21 @@ hr {
 
 .new {
     background-color: var(--desaturatedDarkCyan);
+    margin: 0 5px;
+    font-weight: bold;
 }
 
 .featured {
     background-color: #333;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.job-info {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 </style>
