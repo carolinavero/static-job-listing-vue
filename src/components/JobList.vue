@@ -10,6 +10,7 @@
           :featuredTag="job.featured"
           :position="job.position"
           :role="job.role"
+          :level="job.level"
           :postedAt="job.postedAt"
           :contract="job.contract"
           :location="job.location"
@@ -51,7 +52,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 .jobs {
   display: flex;
