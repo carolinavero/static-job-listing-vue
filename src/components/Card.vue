@@ -1,6 +1,6 @@
 <template>
     <div class="card-content">
-        <div class="card d-flex">
+        <div class="card d-flex" v-bind:class="{ featuredBorder: featuredTag }" >
             
             <div class="card-header">
 
@@ -28,10 +28,14 @@
 
                     </div>
 
-                    <h2>{{ position }}</h2>
-
                     <div>
-                        {{ postedAt }} - {{ contract }} - {{ location }}
+                        <a href="#" class="job-name">
+                            {{ position }}
+                        </a>
+                    </div>
+
+                    <div class="job-info__details">
+                        {{ postedAt }} <span></span> {{ contract }} <span></span> {{ location }}
                     </div>
                 </div>
 
@@ -157,7 +161,7 @@ export default {
     background-color: #fff;
     padding: 2rem;
     margin: 1rem;
-    border-radius: .5rem;
+    border-radius: .3rem;
     box-shadow: 3px 8px 8px #5ba3a429;
     line-height: 1.5;
     width: 100%;
@@ -165,19 +169,31 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    border-left: 5px solid transparent;
 }
 
 .card img {
-    width: 50px;
+    width: 70px;
     height: auto;
+}
+
+.card.featuredBorder {
+   border-left-color: var(--desaturatedDarkCyan);
 }
 
 .card-header {
     display: flex;
 }
-h2 {
-    font-size: 1rem;
+.job-name {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--veryDarkGrayishCyan);
 }
+.job-name:hover {
+    color: var(--desaturatedDarkCyan);
+}
+
 h3 {
     font-size: .9rem;
     color: var(--desaturatedDarkCyan);
@@ -209,7 +225,10 @@ hr {
     border-radius: .5rem;
     margin: 5px;
 }
-
+.tag:hover {
+     color: var(--lightGrayishCyanBg);
+    background-color: var(--desaturatedDarkCyan);
+}
 
 .d-flex {
     display: flex;
@@ -253,6 +272,23 @@ hr {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+
+.job-info__details {
+    color: var(--darkGrayishCyan);
+
+}
+
+.job-info__details span::before{
+   content: '';
+   display: inline-block;
+   width: 3px;
+   height: 3px;
+   -moz-border-radius: 50px;
+   -webkit-border-radius: 50px;
+   border-radius: 50px;
+   background-color: var(--darkGrayishCyan);
+   margin: 3px 10px;
 }
 
 </style>

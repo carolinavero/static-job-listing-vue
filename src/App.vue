@@ -60,6 +60,8 @@ header {
   background-image: url(./images/bg-header-desktop.svg);
   background-repeat: no-repeat;
   background-size: cover;
+
+  margin-bottom: 3rem;
 }
 
 </style>

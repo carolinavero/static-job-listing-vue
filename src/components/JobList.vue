@@ -68,6 +68,8 @@ export default {
 
   max-width: 1440px;
   width: 100%;
+
+  margin-bottom: 4rem;
 }
 
 </style>
