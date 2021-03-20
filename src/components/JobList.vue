@@ -2,31 +2,33 @@
     <div class="jobs">
       <div class="job-list">
 
-        <div v-if="activeFilters" class="filter">
-
-          <div v-for="filter in filters" :key="filter.id">
-            {{ filter }}
-          </div>
-
-          <div class="card">
-            <div class="filtersList">
-
-              <div class="filterTag">
-                <span>nome</span> 
-                <button @click="removeFilter"><img src="../assets/icon-remove.svg" alt="remove"></button> 
-              </div>
+        <div v-if="activeFilters" class="filter"> 
             
-            </div>
+          <div class="card">
 
-            <div>
-              <button @click="clearFilters" class="clearLink">
-                Clear
-              </button>
-            </div>
+              <div class="filtersList">
+                <div class="d-flex">
+                  <div v-for="filter in filters" :key="filter.id">
 
+                    <div class="filterTag">
+                      <span> {{ filter }} </span> 
+                      <button @click="removeFilter(filterId)"><img src="../assets/icon-remove.svg" alt="remove"></button> 
+                    </div>
+                  
+                  </div>
+                </div>
+
+                <div> 
+                  <button @click="clearFilters" class="clearLink">
+                    Clear
+                  </button>
+                </div>
+
+            </div>
+          
           </div>
 
-        </div>
+        </div> 
 
         <Card 
           v-for="job in jobs" 
@@ -44,6 +46,7 @@
           :location="job.location"
           :languages="job.languages"
           :tools="job.tools"
+          :filter="job.filter"
         />
       </div>
     </div>
@@ -58,7 +61,8 @@ export default {
   data() {
     return {
       jobs: [],
-      activeFilters: false
+      filters: [],
+      activeFilters: true
     }
   },
   components: {
@@ -66,6 +70,11 @@ export default {
   },
   mounted() {
     this.fetchData();
+
+    setTimeout(() => {
+      this.filters = ' ';
+      
+    }, 2000);
   },
   methods: {
     async fetchData() {
@@ -75,12 +84,12 @@ export default {
       this.jobs = values;
       return values;
     },
-    removeFilter() {
-      console.log("remove this filter");
+    removeFilter(filterId) {
+      console.log("remove this filter: ", filterId);
     },
     clearFilters() {
-      console.log('filter')
-      activeFilters = false;
+      console.log('clear filters')
+      this.activeFilters = false;
     }
   }
 }
@@ -113,8 +122,11 @@ export default {
 
 }
 .filtersList {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .filterTag {

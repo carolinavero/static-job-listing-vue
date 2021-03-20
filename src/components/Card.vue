@@ -134,13 +134,19 @@ export default {
         tools: {
             type: Array,
             required: false
-        }
+        },
 
+        filters: {
+            type: Array,
+            required: false
+        },
+        
     },
     methods: {
         filterJob: function (filterValue, id) {
             console.log("filter!", filterValue, id);
-            
+            //this.filters.push(id,filterValue);
+            //return this.filters
         }
     }
 }
@@ -191,7 +197,7 @@ export default {
     display: flex;
 }
 .job-name {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: bold;
     color: var(--veryDarkGrayishCyan);
 }
@@ -230,6 +236,7 @@ hr {
     border-radius: .5rem;
     margin: 5px;
     position: relative;
+    font-family: 'Spartan', sans-serif;
 }
 .tag:hover {
      color: var(--lightGrayishCyanBg);
@@ -282,7 +289,7 @@ hr {
 
 .job-info__details {
     color: var(--darkGrayishCyan);
-
+    font-size: .9rem;
 }
 
 .job-info__details span::before{
