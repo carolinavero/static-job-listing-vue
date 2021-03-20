@@ -5,11 +5,11 @@
             <div class="card-header">
 
                 <div class="img-rounded">
-                    <img  :src="logo" :alt="company" />
+                    <img :src="logo" :alt="company" />
                 </div>
 
                 <div class="job-info">
-
+                
                     <div class="d-flex">
                         <div class="job-title">
                             <h3>{{ company }}</h3>
@@ -46,26 +46,26 @@
                 <div class="d-flex f-wrap">
 
                     <div>
-                        <button @click="filterJob (role)"  class="tag">
+                        <button @click="filterJob (role, id)"  class="tag">
                             {{ role }}
                         </button>
                     </div>
 
                     <div >
-                        <button @click="filterJob(level)" class="tag">
+                        <button @click="filterJob(level, id)" class="tag">
                             {{ level }}
                         </button>
                     </div>
 
                     <div v-if="languages" >
-                        <button @click="filterJob(language)" class="tag" 
+                        <button @click="filterJob(language, id)" class="tag" 
                         v-for="(language, index) in languages" :key="index">
                             {{ language }}
                         </button>
                     </div>
 
                     <div v-if="tools" >
-                        <button @click="filterJob(tool)" class="tag" 
+                        <button @click="filterJob(tool, id)" class="tag" 
                             v-for="(tool, index) in tools" :key="index">
                             {{ tool }}
                         </button>
@@ -83,6 +83,10 @@
 export default {
     name: "Card",
     props: {
+        id: {
+            type: Number,
+            required: true
+        },
         company: {
             type: String,
             required: true
@@ -134,8 +138,9 @@ export default {
 
     },
     methods: {
-        filterJob: function (filterValue) {
-            console.log("filter!", filterValue)
+        filterJob: function (filterValue, id) {
+            console.log("filter!", filterValue, id);
+            
         }
     }
 }
@@ -224,6 +229,7 @@ hr {
     padding: 10px;
     border-radius: .5rem;
     margin: 5px;
+    position: relative;
 }
 .tag:hover {
      color: var(--lightGrayishCyanBg);

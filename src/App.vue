@@ -1,10 +1,9 @@
 <template>
-<div>
-  <header>
-  
-  </header>
-  <JobList></JobList>
-</div>
+  <div>
+    <header>
+    </header>
+    <JobList></JobList>
+  </div>
 </template>
 
 <script>
