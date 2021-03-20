@@ -56,7 +56,7 @@ header {
   height: 150px;
   width: 100vw;
   background-color: var(--desaturatedDarkCyan);
-  background-image: url(./images/bg-header-desktop.svg);
+  /* background-image: url(./images/bg-header-desktop.svg); */
   background-repeat: no-repeat;
   background-size: cover;
 
