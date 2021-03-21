@@ -82,6 +82,15 @@
 <script>
 export default {
     name: "Card",
+    created() {
+        this.$emit('created')
+    },
+    data() {
+        return {
+            filters: ['1..', '2..'],
+            tags: [...this.role, ...this.level, ...this.languages, ...this.tools]
+        }
+    },
     props: {
         id: {
             type: Number,
@@ -135,18 +144,23 @@ export default {
             type: Array,
             required: false
         },
-
-        filters: {
-            type: Array,
+        method: {
+            type: Function,
             required: false
-        },
-        
+        }
+    },
+    mounted() {
+        this.$emit('filterJob', this.filters);
+        this.$emit('getTags', this.tags);
+
     },
     methods: {
         filterJob: function (filterValue, id) {
             console.log("filter!", filterValue, id);
-            //this.filters.push(id,filterValue);
-            //return this.filters
+            this.filters.push(filterValue);
+
+            console.log("array de filtros: ", this.filters);
+
         }
     }
 }

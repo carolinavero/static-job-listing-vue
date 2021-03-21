@@ -12,7 +12,9 @@
 
                     <div class="filterTag">
                       <span> {{ filter }} </span> 
-                      <button @click="removeFilter(filterId)"><img src="../assets/icon-remove.svg" alt="remove"></button> 
+                      <button @click="removeFilter(filterId)">
+                        <img src="../assets/icon-remove.svg" alt="remove">
+                      </button> 
                     </div>
                   
                   </div>
@@ -46,7 +48,8 @@
           :location="job.location"
           :languages="job.languages"
           :tools="job.tools"
-          :filter="job.filter"
+          @filterJob="handleFilter"
+          @getTags="handleTags"
         />
       </div>
     </div>
@@ -61,37 +64,45 @@ export default {
   data() {
     return {
       jobs: [],
+      tags: [],
       filters: [],
       activeFilters: true
     }
   },
+
   components: {
     Card,
   },
   mounted() {
     this.fetchData();
-
-    setTimeout(() => {
-      this.filters = ' ';
-      
-    }, 2000);
   },
   methods: {
     async fetchData() {
       const res = await fetch("data.json");
       const values = await res.json();
-      console.log(values)
+      console.log("json", values)
       this.jobs = values;
       return values;
     },
+
+    handleTags(event) {
+      console.log('handle tags!', event, this.tags);
+    },
+
+    handleFilter(event, filters) {
+      console.log('handle filter!', event, filters);
+    },
+    
     removeFilter(filterId) {
       console.log("remove this filter: ", filterId);
     },
+
     clearFilters() {
       console.log('clear filters')
       this.activeFilters = false;
+      filter = []
     }
-  }
+  },
 }
 </script>
 
