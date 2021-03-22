@@ -8,11 +8,11 @@
 
               <div class="filtersList">
                 <div class="d-flex">
-                  <div v-for="filter in filters" :key="filter.id">
+                  <div v-for="(filter, index) in filters" :key="index">
 
                     <div class="filterTag">
-                      <span> {{ filter }} </span> 
-                      <button @click="removeFilter(filterId)">
+                      <span> {{ filter.tag }} </span> 
+                      <button @click="removeFilter(index)">
                         <img src="../assets/icon-remove.svg" alt="remove">
                       </button> 
                     </div>
@@ -33,7 +33,7 @@
         </div> 
 
         <Card 
-          v-for="job in jobs" 
+          v-for="job in filterJobs" 
           :key="job.id" 
           :id="job.id"
           :logo="job.logo"
@@ -48,8 +48,7 @@
           :location="job.location"
           :languages="job.languages"
           :tools="job.tools"
-          @filterJob="handleFilter"
-          @getTags="handleTags"
+          :filter="handleFilter" 
         />
       </div>
     </div>
@@ -64,9 +63,9 @@ export default {
   data() {
     return {
       jobs: [],
-      tags: [],
+      filterJobs: [],
       filters: [],
-      activeFilters: true
+      activeFilters: false
     }
   },
 
@@ -80,27 +79,49 @@ export default {
     async fetchData() {
       const res = await fetch("data.json");
       const values = await res.json();
-      console.log("json", values)
       this.jobs = values;
-      return values;
+      this.filterJobs = values;
     },
 
-    handleTags(event) {
-      console.log('handle tags!', event, this.tags);
+    filter(tag, type) {
+
+      console.log("filtro!!!", tag, type)
+      this.filterJobs = this.filterJobs.filter(job => {
+        if(type == 'level' && job.level == tag) {
+          return true
+        } else if(type == 'role' && job.role == tag) {
+          return true
+        } else if(type == 'languages' && job.languages.includes(tag)) {
+            return true
+        } else if(type == 'tools' && job.tools.includes(tag)) {
+          return true
+        }
+      })
     },
 
-    handleFilter(event, filters) {
-      console.log('handle filter!', event, filters);
+    handleFilter(tag, type) {
+      this.activeFilters = true;
+      this.filters.push({tag, type})
+      this.filter(tag, type)
     },
     
-    removeFilter(filterId) {
-      console.log("remove this filter: ", filterId);
+    removeFilter(index) {
+      this.filters.splice(index, 1)
+      this.filterJobs = this.jobs
+
+      if(this.filters.length < 1) {
+        this.activeFilters = false;
+      } else {
+        this.filters.map(item => {
+          this.filter(item.tag, item.type)
+        })
+      }
     },
 
     clearFilters() {
-      console.log('clear filters')
       this.activeFilters = false;
-      filter = []
+      this.filters = []
+      this.filterJobs = this.jobs
     }
   },
 }
@@ -120,10 +141,8 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   max-width: 1440px;
   width: 100%;
-
   margin-bottom: 4rem;
 }
 
@@ -159,7 +178,6 @@ export default {
 }
 .filterTag button {
   background-color: var(--desaturatedDarkCyan);
-  /* position: absolute; */
   top: 0;
   right: 0;
   bottom: 0;

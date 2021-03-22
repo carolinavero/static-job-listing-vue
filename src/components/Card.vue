@@ -46,26 +46,26 @@
                 <div class="d-flex f-wrap">
 
                     <div>
-                        <button @click="filterJob (role, id)"  class="tag">
+                        <button @click="filter(role, 'role')"  class="tag">
                             {{ role }}
                         </button>
                     </div>
 
                     <div >
-                        <button @click="filterJob(level, id)" class="tag">
+                        <button @click="filter(level, 'level')" class="tag">
                             {{ level }}
                         </button>
                     </div>
 
                     <div v-if="languages" >
-                        <button @click="filterJob(language, id)" class="tag" 
+                        <button @click="filter(language, 'languages')" class="tag" 
                         v-for="(language, index) in languages" :key="index">
                             {{ language }}
                         </button>
                     </div>
 
                     <div v-if="tools" >
-                        <button @click="filterJob(tool, id)" class="tag" 
+                        <button @click="filter(tool, 'tools')" class="tag" 
                             v-for="(tool, index) in tools" :key="index">
                             {{ tool }}
                         </button>
@@ -82,15 +82,6 @@
 <script>
 export default {
     name: "Card",
-    created() {
-        this.$emit('created')
-    },
-    data() {
-        return {
-            filters: ['1..', '2..'],
-            tags: [...this.role, ...this.level, ...this.languages, ...this.tools]
-        }
-    },
     props: {
         id: {
             type: Number,
@@ -144,25 +135,11 @@ export default {
             type: Array,
             required: false
         },
-        method: {
+        filter: {
             type: Function,
             required: false
         }
     },
-    mounted() {
-        this.$emit('filterJob', this.filters);
-        this.$emit('getTags', this.tags);
-
-    },
-    methods: {
-        filterJob: function (filterValue, id) {
-            console.log("filter!", filterValue, id);
-            this.filters.push(filterValue);
-
-            console.log("array de filtros: ", this.filters);
-
-        }
-    }
 }
 </script>
 
