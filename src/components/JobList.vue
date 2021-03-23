@@ -7,7 +7,7 @@
           <div class="card">
 
               <div class="filtersList">
-                <div class="d-flex">
+                <div class="d-flex filtersList--box">
                   <div v-for="(filter, index) in filters" :key="index">
 
                     <div class="filterTag">
@@ -84,8 +84,6 @@ export default {
     },
 
     filter(tag, type) {
-
-      console.log("filtro!!!", tag, type)
       this.filterJobs = this.filterJobs.filter(job => {
         if(type == 'level' && job.level == tag) {
           return true
@@ -100,8 +98,11 @@ export default {
     },
 
     handleFilter(tag, type) {
+      
+      if(!this.filters.find(element => element.tag == tag && element.type == type)) {
+        this.filters.push({tag, type})
+      }
       this.activeFilters = true;
-      this.filters.push({tag, type})
       this.filter(tag, type)
     },
     
@@ -202,6 +203,23 @@ export default {
 
 .clearLink:hover {
   text-decoration: underline;
+}
+
+@media(max-width: 600px) {
+    .filter {
+        width: 100%;
+    }
+    .filterTag img {
+      height: 15px;
+    }
+    .filtersList--box {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      max-width: 80%;
+      flex-wrap: wrap;
+    }
 }
 
 </style>

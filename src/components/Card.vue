@@ -295,4 +295,37 @@ hr {
    margin: 3px 10px;
 }
 
+@media(max-width: 600px) {
+    .card {
+        flex-direction: column;
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+
+    .card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .card-header {
+        position: relative;
+        width: 95%;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: .5rem;
+        margin-bottom: .5rem;
+    }
+
+    .card-content {
+        width: 100%;
+    }
+
+    .img-rounded {
+        position: absolute;
+        top: -50px;
+
+          width: 50px;
+        height: 50px;
+    }
+}
+
 </style>
