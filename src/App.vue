@@ -59,11 +59,17 @@ header {
   height: 150px;
   width: 100vw;
   background-color: var(--desaturatedDarkCyan);
-  /* background-image: url(./images/bg-header-desktop.svg); */
+  background-image: url(../public/images/bg-header-desktop.svg);
   background-repeat: no-repeat;
   background-size: cover;
 
   margin-bottom: 3rem;
+}
+
+@media(max-width: 600px) {
+  header {
+    background-image: url(../public/images/bg-header-mobile.svg);
+  }
 }
 
 </style>

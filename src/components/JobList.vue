@@ -149,9 +149,18 @@ export default {
 
 .filter {
   display: flex;
-  width: 80%;
+  width: 80%; 
+  max-width: 1150px;
 
+  position: absolute;
+  top: 10%;
 }
+
+.filter .card {
+  padding: 1rem;
+  margin: 1rem;
+}
+
 .filtersList {
   width: 100%;
   display: flex;
@@ -208,10 +217,24 @@ export default {
 @media(max-width: 600px) {
     .filter {
         width: 100%;
+        height: auto;
+        position: absolute;
+        top: 10px;
+        height: 180px;
+        overflow: hidden;
     }
+    .filter .card {
+      padding: .5rem;
+    }
+
+    .filterList {
+      overflow: hidden;
+    }
+
     .filterTag img {
       height: 15px;
     }
+
     .filtersList--box {
       display: flex;
       flex-direction: row;

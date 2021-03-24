@@ -263,12 +263,14 @@ hr {
     background-color: var(--desaturatedDarkCyan);
     margin: 0 5px;
     font-weight: bold;
+    padding-top: .4rem;
 }
 
 .featured {
     background-color: #333;
     margin: 0 5px;
     font-weight: bold;
+    padding-top: .4rem;
 }
 
 .job-info {
@@ -325,6 +327,12 @@ hr {
 
           width: 50px;
         height: 50px;
+    }
+    .job-info {
+        margin-top: 1rem;
+    }
+    .job-title {
+        margin-bottom: 1rem;
     }
 }
 
